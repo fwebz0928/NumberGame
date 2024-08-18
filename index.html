@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Game</title>
+</head>
+
+<body>
+    <div id="top_buttons">
+        <button id=ten_slot_button>
+            10 Slots
+        </button>
+        <button id=twenty_slot_button>
+            20 slots
+        </button>
+
+    </div>
+
+
+    <div id="game_instructions_toggle">
+        <button id=toggle_button>
+            How To Play <span id="arrow">&#9662;</span>
+        </button>
+        <div id=instructions>
+            <p>
+                Numbers are randomly generated from 1-1000, place them in correct order
+            </p>
+            <h4>Rules:</h4>
+            <ul id="rules-list">
+                <li>Once you place a number, you can't move it.</li>
+                <li>If you can't place the current number in any slot without breaking the order, you lose the game.
+                </li>
+                <li>Fill all slots to win!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="number-generation">
+        <h1 id=status>WIN!</h1>
+        <h1 id=generated_number>
+            1-1000
+        </h1>
+        <button id="game_button">
+            New Game
+        </button>
+    </div>
+    <div id="slots_container">
+    </div>
+
+    <div id="social_info">
+        <h3>Created by Webz</h3>
+        <a href="https://twitter.com/ThaW3bZ" target="_blank" class="social-button x-button">
+            <i class="fab fa-twitter"></i>
+        </a>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
