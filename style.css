@@ -62,14 +62,12 @@ body {
   }
 }
 
-#top_buttons
-{
+#top_buttons {
   display: flex;
   justify-content: space-between; /* Spreads the buttons across the container */
   gap: 15px; /* Adds space between the buttons */
   margin-top: 20px; /* Adds some space above the container */
 }
-
 
 #game_instructions_toggle {
   position: fixed;
@@ -119,7 +117,6 @@ body {
   opacity: 1;
   padding: 15px;
 }
-
 
 #instructions h3 {
   margin-top: 0;
@@ -217,7 +214,6 @@ button,
   margin-bottom: 10px; /* Space between the text and the button */
 }
 
-
 .social-button {
   display: inline-block;
   width: 40px;
@@ -239,3 +235,33 @@ button,
   vertical-align: middle;
 }
 
+#checkbox {
+  display: flex;
+  align-items: center;
+  background-color: #1f1f1f;
+  border: 1px solid #2e2e2e;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 20px 0;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.5);
+  cursor: pointer;
+  accent-color: #27ae60; /* Checkbox color to match the theme */
+}
+
+input[type="checkbox"]:checked {
+  background-color: #27ae60; /* Change color when checked */
+}
+
+label {
+  cursor: pointer; /* Make the label clickable */
+  font-size: 1rem;
+  color: #e0e0e0;
+}

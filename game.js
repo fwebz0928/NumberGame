@@ -2,15 +2,16 @@ let slots = [];
 let currentNumber = 0;
 let totalSlots = 10; // Default to 10 slots
 let game_over = false;
+let auto_number = false;
 
 document.getElementById("game_button").addEventListener("click", startNewGame);
 
 function startNewGame() {
   game_over = false;
   slots = Array(totalSlots).fill(null);
-  document.getElementById("status").innerText = "";
-  document.getElementById("generated_number").innerText = "1-1000";
-  document.getElementById("game_button").innerText = "New Game";
+  document.getElementById("status").textContent = "";
+  document.getElementById("generated_number").textContent = "1-1000";
+  document.getElementById("game_button").textContent = "New Game";
   updateSlots();
   updateCurrentNumber();
 }
@@ -21,12 +22,12 @@ function generateRandomNumber() {
 
 function updateCurrentNumber() {
   currentNumber = generateRandomNumber();
-  document.getElementById("generated_number").innerText = `${currentNumber}`;
+  document.getElementById("generated_number").textContent = `${currentNumber}`;
 
   if (checkGameOver()) {
     updateStatus("Lost!");
     game_over = true;
-    document.getElementById("game_button").innerText = "Play Again";
+    document.getElementById("game_button").textContent = "Play Again";
   } else {
     console.log("Game not over");
   }
@@ -35,11 +36,9 @@ function updateCurrentNumber() {
 function checkGameOver() {
   for (let i = 0; i < slots.length; i++) {
     if (slots[i] === null) {
-      // Determine the valid range for this empty slot
       let prevValue = -Infinity;
       let nextValue = Infinity;
 
-      // Find the closest filled slot before the current index
       for (let j = i - 1; j >= 0; j--) {
         if (slots[j] !== null) {
           prevValue = slots[j];
@@ -47,26 +46,24 @@ function checkGameOver() {
         }
       }
 
-      // Find the closest filled slot after the current index
       for (let j = i + 1; j < slots.length; j++) {
         if (slots[j] !== null) {
           nextValue = slots[j];
           break;
         }
       }
-
-      // Check if the current number can fit in this slot
       if (currentNumber > prevValue && currentNumber < nextValue) {
-        return false; // There is a valid place for the current number
+        return false;
       }
     }
   }
-  return true; // No valid place found, game over
+  return true;
 }
 
 function place_number(index) {
+  // Slot already filled, do nothing
   if (slots[index] !== null || game_over) {
-    return; // Slot already filled, do nothing
+    return;
   }
 
   const prevValue =
@@ -77,14 +74,14 @@ function place_number(index) {
       : Infinity;
 
   if (currentNumber > prevValue && currentNumber < nextValue) {
-    slots[index] = currentNumber; // Place the number in the selected slot
-    updateSlots(); // Update the slots on the UI
+    slots[index] = currentNumber;
+    updateSlots();
 
     if (slots.every((slot) => slot !== null)) {
       updateStatus("Won!");
       document.getElementById("game_button").innerText = "Play Again";
     } else {
-      updateCurrentNumber(); // Generate a new number for the next round
+      if (auto_number) updateCurrentNumber();
     }
   } else {
     updateStatus("Lost!");
@@ -114,11 +111,8 @@ function updateSlots() {
       slotContentDiv.textContent = number;
     }
 
-    // Append both the slot number and content to the slot div
     slotDiv.appendChild(numberDiv);
     slotDiv.appendChild(slotContentDiv);
-
-    // Add the slot div to the container
     slotsContainer.appendChild(slotDiv);
   });
 }
@@ -129,6 +123,20 @@ function updateStatus(status_text) {
   status_div.style.color = status_text.startsWith("Lost") ? "red" : "green";
   status_div.style.opacity = 1;
   status_div.style.visibility = "visible";
+}
+
+function setupCheckbox() {
+  const check_box = document.getElementById("new_number_box");
+  check_box.addEventListener("change", () => {
+    const next_num_button = document.getElementById("next_num_button");
+    if (check_box.checked) {
+      next_num_button.style.display = "none";
+      auto_number = true;
+    } else {
+      next_num_button.style.display = "block";
+      auto_number = false;
+    }
+  });
 }
 
 document.getElementById("ten_slot_button").addEventListener("click", () => {
@@ -155,5 +163,10 @@ document.getElementById("toggle_button").addEventListener("click", () => {
   }
 });
 
+document.getElementById("next_num_button").addEventListener("click", () => {
+  if (auto_number === false) updateCurrentNumber();
+});
+
 // Initialize the game with 10 slots
 startNewGame();
+setupCheckbox();

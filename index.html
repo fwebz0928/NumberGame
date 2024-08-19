@@ -18,22 +18,28 @@
         <button id=twenty_slot_button>
             20 slots
         </button>
+        <div id="checkbox">
+            <label for="new_number_box">
+                <input type="checkbox" , id="new_number_box">
+                Auto New Number
+            </label>
+        </div>
 
     </div>
 
 
     <div id="game_instructions_toggle">
         <button id=toggle_button>
-            How To Play <span id="arrow">&#9662;</span>
+            Help?<span id="arrow">&#9662;</span>
         </button>
         <div id=instructions>
             <p>
-                Numbers are randomly generated from 1-1000, place them in correct order
+                Numbers are randomly generated from 1-1000, place them in the correct order
             </p>
             <h4>Rules:</h4>
             <ul id="rules-list">
                 <li>Once you place a number, you can't move it.</li>
-                <li>If you can't place the current number in any slot without breaking the order, you lose the game.
+                <li>If you can't place the current number in any slot without breaking the order, you lose.
                 </li>
                 <li>Fill all slots to win!</li>
             </ul>
@@ -42,9 +48,14 @@
 
     <div id="number-generation">
         <h1 id=status>WIN!</h1>
-        <h1 id=generated_number>
-            1-1000
-        </h1>
+        <div id=number_container>
+            <h1 id=generated_number>
+                1-1000
+            </h1>
+            <button id="next_num_button">
+                Next #
+            </button>
+        </div>
         <button id="game_button">
             New Game
         </button>
